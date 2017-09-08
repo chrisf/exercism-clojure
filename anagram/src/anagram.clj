@@ -2,9 +2,10 @@
   (:require [clojure.string :as str]))
 
 (defn is-anagram? [word potential]
-  (and
-    (not (= (str/lower-case word) (str/lower-case potential)))
-    (= (sort (str/lower-case word)) (sort (str/lower-case potential)))))
+  (let [word (str/lower-case word) potential (str/lower-case potential)]
+    (and
+      (not (= word potential))
+      (= (sort word) (sort potential)))))
 
 (defn anagrams-for [word list]
   (filter (partial is-anagram? word) list))
